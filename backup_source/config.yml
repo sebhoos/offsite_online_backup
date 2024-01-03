@@ -1,0 +1,21 @@
+---
+mail:
+  account: "<sending mail address>"  # mail address that sends the mails
+  password: "<password>"  # password for the _account_ that sends the mails
+  server: "<mail server>"  # smtp server address, usually something like smtp.DOMAIN.ENDING
+  port: 465  # port of the smtp server
+  receiver: "<receiving mail address>" # mail address where the mail should be sent to
+
+files:
+  prefix_path: "/volume1/"  # prefix that is pasted in front of each folder listed in _folder_
+  folder: ["music","video","photo"]  # folders that should be synced
+  exclude: ["#snapshot", "#recycle", "@eaDir"]   # files and folders that should be excluded from backing up
+  rsync_options: ["-az", "--chmod=Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r", "--delete"]  # rsync options that should be used
+
+backup_sink:
+  user: "pi"  # username of the backup server
+  host: "192.168.179.5"  # IP of server where the backup should be written
+  backup_folder: "/media/BackupPiVol/backups/"  # folder on the backup server where the backup is saved
+  is_mounted_indicator: "is_mounted" # file that has to be in backup_folder to validate if the backup folder is actually on a mounted disk
+
+send_mail_after_successful_backup: True  # if true, a mail is send after each successful backup
